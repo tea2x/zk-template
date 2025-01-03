@@ -4,10 +4,13 @@ pragma circom 2.0.3;
 template IsNoneZero() {
     signal input in;
     signal output out;
+
     signal inv;
 
-    inv <-- (in != 0) ? 1/in : 0;
+    inv <-- in!=0 ? 1/in : 0;
+
     out <== in*inv;
+    in*(-out+1) === 0;
 }
 
 component main = IsNoneZero();
