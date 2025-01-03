@@ -5,13 +5,13 @@ include "../../node_modules/circomlib/circuits/comparators.circom";
 template IsNoneZero() {
     signal input in;
     signal output out;
-    signal inv;
 
-    component iszero = IsZero();
-    iszero.in <== in;
-    inv <-- (iszero.out != 0) ? 0 : 1;
+    component iszero_1 = IsZero();
+    iszero_1.in <== in;
+    component iszero_2 = IsZero();
+    iszero_2.in <== iszero_1.out;
 
-    out <== inv;
+    out <== iszero_2.out;
 }
 
 component main = IsNoneZero();
